@@ -4,8 +4,6 @@ import icu
 def ordCidade(cidade):
     return cidade['nome']
 
-collator = icu.Collator.createInstance(icu.Locale('pt_PT.UTF-8'))
-
 f = open("mapa.json")
 mapa = json.load(f)
 cidades = mapa['cidades']
@@ -19,8 +17,7 @@ for i in cidades:
     else:
         distritos.update({i['distrito'] : [i['nome'],i['id']]})
 
-sorted_keys = sorted(distritos.keys(), key=collator.getSortKey)
-distritos = {key:distritos[key] for key in sorted_keys}
+distritos = dict(sorted(distritos.items()))
 
 
 
@@ -30,9 +27,13 @@ pagHTML = """
     <head>
         <title> TPC2 EngWeb </title>
         <meta charset="utf-8" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
     </head>
-    <body>
-        <h1> Mapa Virtual </h1>
+    <body class="container bg-primary-subtle">
+        <center>
+            <h1> Mapa Virtual </h1>
+        </center>
 """
 
 for d in distritos:

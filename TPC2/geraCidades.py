@@ -1,12 +1,8 @@
 import json
 import time
-import icu 
-from operator import itemgetter
 
 def ordCidade(c):
     return c['nome']
-
-collator = icu.Collator.createInstance(icu.Locale('pt_PT.UTF-8'))
 
 f = open("mapa.json")
 mapa = json.load(f)
@@ -46,22 +42,20 @@ for c in cidades:
                 </center>
             """    
     nomefich = "./temp/" + str(c['id']) + ".html"
-    f = open(nomefich,"w")   # usar flag "o" se o ficheiro nao existir 
+    f = open(nomefich,"w")  
     pagHTML += f"""
-                            <a name="{c['id']}"></a>
-                            <h3>{c['nome']}</h3>
-                            <p><b>População</b> {c['população']}</p>
-                            <p><b>Descrição:</b>{c['descrição']}</p>
-                            <p><b>Distrito:</b>{c['distrito']}</p>
-                            <h3> ligacoes:</h3>
-                            <ul>
+                <a name="{c['id']}"></a>
+                <h3>{c['nome']}</h3>
+                <p><b>População</b> {c['população']}</p>
+                <p><b>Descrição:</b>{c['descrição']}</p>
+                <p><b>Distrito:</b>{c['distrito']}</p>
+                <h3> Ligações:</h3>
+                <ul>
                 """
     array = lig[c['id']]
 
     for elem in array:
-        pagHTML += f""" 
-                        <li><a href="{elem[2]}">{elem[0]}</a> - {elem[1]} Km</li>
-        """
+        pagHTML += f"<li><a href='{elem[2]}'>{elem[0]}</a> - {elem[1]} Km</li>"
 
     pagHTML += f"""</ul>
                     <adress><a href="/"> [voltar ao Indice] </a>                
