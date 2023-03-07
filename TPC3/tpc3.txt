@@ -1,0 +1,7 @@
+Get / =>
+
+
+1 lista de pessoas
+2 distribuicao por sexo
+3 distribuicao por desporto
+4 top 10 de profissao
