@@ -67,7 +67,7 @@ http.createServer(function(req,res)
                 )
 
                 res.writeHead(200,{'Content-Type': 'text/html; charset=utf-8'})
-                res.end(mypages.genMainPage(pessoasOrdenadas, d))
+                res.end(mypages.genPessoasPage(pessoasOrdenadas, d))
             })
             .catch(erro =>{
                 console.log("Erro " + erro)
@@ -77,27 +77,43 @@ http.createServer(function(req,res)
     }
     else if (req.url == "/distSexo")
     {
-        axios.get('http://localhost:3000/pessoas/' + req.url.substring(9))
+        axios.get('http://localhost:3000/pessoas/')
             .then(function(resp){
-                var pessoa = resp.data
+                var pessoas = resp.data
 
                 res.writeHead(200,{'Content-Type': 'text/html; charset=utf-8'})
-                res.end(mypages.genPessoaPage(pessoa, d))
+                res.end(mypages.distSexoPage(pessoas, d))
             })
             .catch(erro =>{
                 console.log("Erro " + erro)
                 res.writeHead(500,{'Content-Type': 'text/html; charset=utf-8'})
                 res.end("<p>ERRO" + erro + "</p>")
+            })
+    }
+    else if(req.url.match(/sexo\/[a-z]+/))
+    {
+        axios.get('http://localhost:3000/pessoas?sexo=' + req.url.substring(6))
+            .then(function(resp){
+                var pessoas = resp.data 
+
+                res.writeHead(200, {'Content-Type': 'text/html; charset: utf8'})
+                res.end(myPage.genPessoasPage(pessoas,d))    
+            })
+            .catch((erro)=>{
+                console.log("Erro: " + erro)
+            
+                res.writeHead(500, {'Content-Type': 'text/html; charset: utf8'})
+                res.end("<p>ERRO: " + erro + "</p>")
             })
     }
     else if (req.url == "/distDesporto")
     {
-        axios.get('http://localhost:3000/pessoas/' + req.url.substring(9))
+        axios.get('http://localhost:3000/pessoas/')
             .then(function(resp){
-                var pessoa = resp.data
+                var pessoas = resp.data
 
                 res.writeHead(200,{'Content-Type': 'text/html; charset=utf-8'})
-                res.end(mypages.genPessoaPage(pessoa, d))
+                res.end(mypages.distDesportoPage(pessoas, d))
             })
             .catch(erro =>{
                 console.log("Erro " + erro)
@@ -105,19 +121,59 @@ http.createServer(function(req,res)
                 res.end("<p>ERRO" + erro + "</p>")
             })
     }
+    else if(req.url.match(/desporto\/[a-zA-Z]+/))
+    {
+        axios.get('http://localhost:3000/pessoas')
+            .then(function(resp){
+                var pessoas = resp.data 
+                var desporto = decodeURIComponent(req.url.substring(10))
+                var lista = new Array()
+
+                pessoas.forEach((p) => {
+                    if(p.desportos.includes(desporto)) lista.push(p)
+                })
+
+                res.writeHead(200, {'Content-Type': 'text/html; charset: utf8'})
+                res.end(mypages.genPessoasPage(lista,d))    
+            })
+            .catch((erro)=>{
+                console.log("Erro: " + erro)
+            
+                res.writeHead(500, {'Content-Type': 'text/html; charset: utf8'})
+                res.end("<p>Erro: " + erro + "</p>")
+            })
+    }
     else if (req.url == "/topProfissoes")
     {
-        axios.get('http://localhost:3000/pessoas/' + req.url.substring(9))
+        axios.get('http://localhost:3000/pessoas/')
             .then(function(resp){
                 var pessoa = resp.data
 
                 res.writeHead(200,{'Content-Type': 'text/html; charset=utf-8'})
-                res.end(mypages.genPessoaPage(pessoa, d))
+                res.end(mypages.topProfPage(pessoa, d))
             })
             .catch(erro =>{
                 console.log("Erro " + erro)
                 res.writeHead(500,{'Content-Type': 'text/html; charset=utf-8'})
                 res.end("<p>ERRO" + erro + "</p>")
+            })
+    }
+    else if(req.url.match(/profissoes\/[a-zA-Z]+/))
+    {
+        var profissao = decodeURIComponent(req.url.substring(12))
+        console.log(profissao)
+        axios.get('http://localhost:3000/pessoas?profissao=' + profissao)
+            .then(function(resp){
+                var pessoas = resp.data             
+
+                res.writeHead(200, {'Content-Type': 'text/html; charset: utf8'})
+                res.end(mypages.genPessoasPage(pessoas,d))    
+            })
+            .catch((erro)=>{
+                console.log("Erro: " + erro)
+            
+                res.writeHead(500, {'Content-Type': 'text/html; charset: utf8'})
+                res.end("<p>Erro: " + erro + "</p>")
             })
     }
     else
