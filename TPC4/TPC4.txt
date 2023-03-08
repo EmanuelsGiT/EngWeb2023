@@ -1,0 +1,42 @@
+TPC4
+
+TO DO LIST APP
+
+|-----|
+|  1  |
+-------
+|2 | 3|
+-------
+
+1-> Form
+    ->Introdução de dados de tasks
+    -> botao submit
+
+2-> tarefas a realizar 
+    -> com botao para marcar uma tarefa feita
+    -> botao delete
+
+3-> tarefas realizadas
+    -> 
+
+
+JSON SERVER_>
+{
+    "users":
+    [
+        {
+            "id":..,
+            "nome":..,
+
+        }
+    ],
+    "taks":
+    [
+        {
+            "id":..,
+            "duedate
+            "who": who is going to do it
+            "what": task description 
+        }
+    ]
+}
