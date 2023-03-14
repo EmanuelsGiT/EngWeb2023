@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "nome": "emanuel"
+    },
+    {
+      "id": "NqLmfV7"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "nome": "task1",
+      "duedate": "14/03/22",
+      "who": "who is going to do it",
+      "what": "description",
+      "done": 1
+    },
+    {
+      "id": "t2",
+      "nome": "task2",
+      "duedate": "13/03/22",
+      "who": "who is going to do it",
+      "what": "task description",
+      "done": "1"
+    },
+    {
+      "id": "6oXqVoW"
+    }
+  ]
+}

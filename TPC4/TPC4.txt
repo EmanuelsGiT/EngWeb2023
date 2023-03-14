@@ -37,6 +37,7 @@ JSON SERVER_>
             "duedate
             "who": who is going to do it
             "what": task description 
+            "completed":"true"
         }
     ]
 }
