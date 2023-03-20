@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "name": "emanuel",
+      "email": "emanuel@gmail.com"
+    }
+  ],
+  "tasks": [
+    {
+      "name": "task1",
+      "duedate": "2023-03-14",
+      "who": "who is going to do it",
+      "what": "description",
+      "done": 1
+    },
+    {
+      "name": "A4838",
+      "duedate": "2023-03-25",
+      "who": "emanuel",
+      "what": "description",
+      "done": 0
+    }
+  ]
+}
